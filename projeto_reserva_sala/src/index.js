@@ -14,9 +14,14 @@ class AppController{ //Define uma classe para organizar a logica de aplicação
         this.express.use(express.json()); //Permitir que a aplicação receba dados em formato JSON nas requisições 
     }
                 //Define as rotas da nossa API
-    routes(){   //Define uma rota GET para o caminho health
+    routes(){   
+        const apiRoutes = require('./routes/apiRoutes');
+    this.express.use('/projeto_de_reserva/', apiRoutes);
 
-        this.express.get('/health/',(req, res) => { 
+
+        //Define uma rota GET para o caminho health
+
+        this.express.get('/projeto_de_reserva/health/',(req, res) => { 
             res.send({ status: "OK" ,
             nome:"Agenda de sala"});
         
