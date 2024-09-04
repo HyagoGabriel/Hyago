@@ -1,0 +1,16 @@
+{
+  "name": "api_url_base",
+  "version": "2.0.0",
+  "description": "ativade",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+
+  },
+  "author": "Hyago",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
