@@ -1,0 +1,47 @@
+create table organizador(
+    id_organizador int auto_increment primary key, nome varchar(100) not null, email varchar(100) not null unique, senha varchar(50) not null, telefone char(11) not null );
+    
+
+
+-- povoando a tabela usuario
+insert into usuario (nome, email, senha, telefone)
+    values ("Pedro Bonini", "pedrob@email.com", "senha1234", "16123456789");
+
+
+-- povoando a tabela usuario
+insert into usuario (id_usuario, nome, email, senha, telefone)
+    values (50, "Maria Luisa", "ml@email.com", "senha1234", "16999991111");
+
+
+-- povoando a tabela usuario
+insert into usuario (nome, email, senha, telefone)
+    values ("Mateus Cubeiro", "mc@email.com", "senha1234", "16999999999");
+
+
+-- selecionar apenas algumas colunas da tabela select email, nome from usuario;
+
+
+-- apelido (alias) aos atributos 
+select id_usuario as codigo, telefone as celular,
+nome from usuario;
+
+
+select 10+10 as soma, 10-10 as subtração, 10*10 as multiplicação, 10/10 as divisão;
+
+select id_usuario * 10 as "id x 10",
+nome from usuario;
+
+insert into usuario (id_usuario, nome, email, senha, telefone) values 
+    (2, "Vinicius Fogaça", "fogaca@example.com", "senha123", "16123456789"),
+    (3, "Maria Julia", "hyago@example.com", "senha123", "16888888888"),
+    (4, "Maria Clara", "yasmin@example.com", "senha123", "16999999999"),
+    (5, "livia Maria", "mendes@example.com", "senha123", "16999998888"),
+    (6, "Joao Alexandre", "pepe@example.com", "senha123", "16888889999"),
+    (7, "Guilherme Guimaraes", "gui@example.com", "senha123", "16999997777"),
+    (8, "Clara da Silva", "pedro@example.com", "senha123", "16999996666"),
+    (9, "Leonardo Pedroso", "mateus@example.com", "senha123", "16888886666"),
+    (10, "Gustavo Prior", "juju@example.com", "senha123", "16999993333"),
+    (11, "Yasmin Souza", "zaco@example.com", "senha123", "16888881111");
+
+
+

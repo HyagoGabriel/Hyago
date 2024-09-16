@@ -1,0 +1,27 @@
+/*seletor universal*/
+*{
+    background-color: red;
+    color:white
+}
+
+
+
+
+/*Estilizaçao por nome de */
+h1{
+    background-color: lightgray;
+    color: black;
+
+}
+
+/*Estilização por calsse*/
+.titulo{
+    background-color: blue;
+    color: yellow;
+}
+
+/*Estilização por seltetor de id */
+#destaque{
+    background-color: aqua;
+    color: white
+}
