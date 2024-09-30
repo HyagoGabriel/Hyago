@@ -5,7 +5,7 @@
     flex-wrap: wrap; /* Permite quebra de linha */
     justify-content: space-between; /* Distribui itens com espaço igual entre eles */
     align-items: center; /* Alinha itens no centro do eixo transversal */
-    height: 100vh; /* Altura total da viewport */
+    height: 100%; /* Altura total da viewport */
     border: 2px solid #000;
 }
 
