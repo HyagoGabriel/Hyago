@@ -1,40 +1,106 @@
-*{
-    margin: 0;
-    padding 0;
-    box-sizing: border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    font-family: Arial, sans-serif;
-    background-color: azure;
-    color:black;
-    min-height: 100vh;
+body {
+  font-family: Arial, sans-serif;
+  background-color: azure;
+  color: black;
+  min-height: 100vh;
 }
 
-header{
-    background-color: rgb(37, 70, 143);
+header {
+  background-color: rgb(37, 70, 143);
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+/*Uso do flexbox para alimentar a logo e o titulo*/
+.logo {
+  display: flex;
+
+  /*Alinha verticalmnte os intens da div em questao*/
+  align-items: center;
+  /*Centraliza os intens horizontalmente*/
+  justify-content: center;
+  /* background-color: red; */
+}
+
+header .logo img {
+  max-width: 50px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+header .logo h1 {
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+main{
     padding: 20px;
-    color: white;
+}
+
+main section{
+    margin-bottom: 30px;
+}
+
+#home{
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 8px;
     text-align: center;
 }
- 
-/*Uso do flexbox para alimentar a logo e o titulo*/
-.logo{ 
+
+#home h2{
+    color: #1f2c76;
+
+}
+
+.eventos-container{
     display: flex;
-
-    /*Alinha verticalmnte os intens da div em questao*/
-    align-items: center;
-    /*Centraliza os intens horizontalmente*/
-    justify-content: center; 
-    background-color: red;
-
+    gap: 20px;
 }
 
-img{
-    max-width: 50px;
-    margin-right: 10px;
-
-
-
+.eventos-item{
+    background-color: #858484;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    
 }
+
+footer {
+    background-color: #333; 
+    color: #fff;           
+    text-align: center;    
+    padding: 30px;                        
+    margin-top: 20px; 
+    justify-content: center;
+    align-items: center; 
+}
+
