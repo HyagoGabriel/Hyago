@@ -1,0 +1,28 @@
+/* Definindo o contêiner flexível */
+.container {
+    display: flex;
+    flex-direction: row; /* Alinha itens horizontalmente */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    justify-content: space-between; /* Distribui itens com espaço igual entre eles */
+    align-items: center; /* Alinha itens no centro do eixo transversal */
+    height: 100vh; /* Altura total da viewport */
+    border: 2px solid #000;
+}
+
+/* Estilo dos itens flexíveis */
+.item {
+    flex: 1; /* Itens crescem igualmente para preencher o espaço */
+    padding: 20px;
+    margin: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Estilos básicos para header e footer */
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
