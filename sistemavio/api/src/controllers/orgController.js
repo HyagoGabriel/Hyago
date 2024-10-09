@@ -1,6 +1,8 @@
 let orgs = [];
 let id_organizador = 0;
 
+const connect = require("../db/connect");
+
 module.exports = class orgController {
   static async createOrg(req, res) {
     const { nome, email, senha, telefone } = req.body;
@@ -16,28 +18,46 @@ module.exports = class orgController {
     } else if (!email.includes("@")) {
       return res.status(400).json({ error: "Email inválido. Deve conter @" });
     }
+    else {
 
-    // Verifica se já existe um usuário com o mesmo telefone
-    const existingOrgtelefone = orgs.find((org) => org.telefone === telefone);
-    if (existingOrgtelefone) {
-      return res.status(400).json({ error: "Telefone já cadastrado" });
-    }
+      // Construção da query INSERT
 
-    const existingOrgemail = orgs.find((org) => org.email === email);
-    if (existingOrgemail) {
-      return res.status(400).json({ error: "Email já cadastrado" });
-    }
+      const query = `INSERT INTO organizador (nome,email,telefone,senha) VALUES(
+      '${nome}',
+      '${email}',
+      '${telefone}',
+      '${senha}')`;
 
-    // Cria e adiciona novo usuário
-    id_organizador = id_organizador + 1;
+      // Executando a query criada
 
-    const newOrg = { nome, email, senha, telefone, id_organizador };
-    orgs.push(newOrg);
-
-    return res
-      .status(201)
-      .json({ message: "Usuário criado com sucesso", orgs: newOrg });
-  }
+      try {
+        connect.query(query, function (err) {
+          if (err) {
+            console.log(err);
+            console.log(err.code);
+            if (err.code === "ER_DUP_ENTRY") {
+              return res
+                .status(400)
+                .json({ error: "O email já está vinculado a outro usuário" });
+            } // if
+            else {
+              return res
+                .status(500)
+                .json({ error: "Erro Interno do Servidor" });
+            } // else
+          } // if
+          else {
+            return res
+              .status(201)
+              .json({ message: "Usuário Criado com Sucesso" });
+          } // else
+        }); // connect
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro Interno de Servidor" });
+      } // catch
+    } // else
+  } // CreateUser
 
   static async getAllOrgs(req, res) {
     return res.status(200).json({ message: "Obtendo todos os usuários", orgs });

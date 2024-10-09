@@ -38,7 +38,7 @@ document
         // correção aqui
         // Executa a resposta de sucesso retorna ao usuario final
         // exibe um alerta com o nome do usuário que acabou de ser cadastrado
-        alert("Usuário cadastrado com sucesso! " + data.user.name);
+        alert("Usuário cadastrado com sucesso! ");
         // Exibe um log no terminal
         console.log("Usuário criado: ", data.user);
         //reseta os campos do formulario apos o sucesso do cadastro

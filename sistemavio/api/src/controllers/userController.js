@@ -1,4 +1,4 @@
-let users = [];
+const connect = require("../db/connect");
 
 module.exports = class userController {
   static async createUser(req, res) {
@@ -8,33 +8,59 @@ module.exports = class userController {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
-    } else if (isNaN(cpf) || cpf.length !== 11) {
+    } // else if
+    else if (isNaN(cpf) || cpf.length !== 11) {
       return res.status(400).json({
         error: "CPF inválido. Deve conter exatamente 11 dígitos numéricos",
       });
-    } else if (!email.includes("@")) {
+    } // else if
+    else if (!email.includes("@")) {
       return res.status(400).json({ error: "Email inválido. Deve conter @" });
-    }
+    } // else if
+    else {
+      // Cria e adiciona novo usuário
+      
+      // Construção da query INSERT
 
-    // Verifica se já existe um usuário com o mesmo CPF
-    const existingUser = users.find((user) => user.cpf === cpf);
-    if (existingUser) {
-      return res.status(400).json({ error: "CPF já cadastrado" });
-    }
+      const query = `INSERT INTO usuario(cpf,password,email,name) VALUES(
+      '${cpf}',
+      '${password}',
+      '${email}',
+      '${name}')`;
 
-    // Cria e adiciona novo usuário
-    const newUser = { cpf, email, password, name };
-    users.push(newUser);
+      // Executando a query criada
 
-    return res
-      .status(201)
-      .json({ message: "Usuário criado com sucesso", user: newUser });
-  }
+      try {
+        connect.query(query, function (err) {
+          if (err) {
+            console.log(err);
+            console.log(eer.code);
+            if (err.code === "ER_DUP_ENTRY") {
+              return res
+                .status(400)
+                .json({ error: "O email já está vinculado a outro usuário" });
+            } // if
+            else {
+              return res
+                .status(500)
+                .json({ error: "Erro Interno do Servidor" });
+            } // else
+          } // if
+          else {
+            return res
+              .status(201)
+              .json({ message: "Usuário Criado com Sucesso" });
+          } // else
+        }); // connect
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro Interno de Servidor" });
+      } // catch
+    } // else
+  } // CreateUser
 
   static async getAllUsers(req, res) {
-    return res
-      .status(200)
-      .json({ message: "Obtendo todos os usuários", users });
+    return res.status(200).json({ message: "Obtendo todos os usuários" });
   }
 
   static async updateUser(req, res) {
