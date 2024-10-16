@@ -77,14 +77,14 @@ module.exports = class userController {
   } //getAllUsers
 
   static async updateUser(req, res) {
-    const { id, name, email, password, cpf } = req.body;
+    const { id_usuario, name, email, password, cpf } = req.body;
     if (!name || !email || !password || !cpf) {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
     const query = `UPDATE usuario SET name=?, email=?, password=?, cpf=? WHERE id_usuario=?`;
-    const values = [name, email, password, cpf, id];
+    const values = [name, email, password, cpf, id_usuario];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
