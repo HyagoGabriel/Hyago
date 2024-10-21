@@ -1,0 +1,164 @@
+	create database vio_hyago;
+
+	use vio_hyago;
+
+	create table usuario(
+	 id_usuario int primary key auto_increment,
+	 nome varchar(100) not null, 
+	 email varchar(100) not null,
+	 telefone char(11) not null,
+	 senha varchar(50) not null,
+	 data_nascimento date not null
+	);
+
+	create table if not exists compra(
+	 id_compra int primary key auto_increment,
+	 data_compra datetime not null,
+	 fkid_usuario int not null,
+	 foreign key (fkid_usuario) references usuario(id_usuario)
+	);
+
+	create table organizador(
+	 id_organizador int primary key auto_increment,
+	 nome_organizador varchar(100) not null, 
+	 email_organizador varchar(100) not null,
+	 telefone_organizador char(11) not null,
+	 senha_organizador varchar(50) not null
+	);
+	
+ 	create table if not exists eventos(
+	 id_evento int primary key auto_increment,
+	 nome_evento varchar(100) not null,
+	 descricao_evento varchar(255) not null,
+	 data_hora_evento datetime not null,
+	 local_evento varchar(255) not null,
+	 fkid_organizador int not null,
+	 foreign key (fkid_organizador) references organizador(id_organizador)
+	);
+
+ 	create table if not exists ingressos(
+	 id_ingresso int primary key auto_increment,
+	 tipo_ingresso varchar(10) not null,
+	 preco_ingresso decimal(5,2) not null,
+	 fkid_evento int not null,
+	 foreign key (fkid_evento) references eventos(id_evento)
+	);
+
+	create table if not exists ingresso_compra(
+	 id_ingresso_compra int primary key auto_increment,
+	 quantidade int not null,
+	 fkid_ingresso int not null,
+	 foreign key (fkid_ingresso) references ingressos(id_ingresso),
+	 fkid_compra int not null,
+	 foreign key (fkid_compra) references compra(id_compra)
+	);
+
+ 	create table if not exists presenca(
+	 id_presenca int primary key auto_increment,
+	 data_hora_checkin datetime not null,
+	 fkid_evento int not null,
+	 foreign key (fkid_evento) references eventos(id_evento),
+	 fkid_compra int not null,
+	 foreign key (fkid_compra) references compra(id_compra)
+	);
+
+	insert into usuario (nome, email, senha, telefone, data_nascimento) values
+	 ('João Silva','joao.silva@example.com','senha123','16123456789','1990-01-15'),
+	 ('Maria Oliveira','maria.oliveira@example.com','senha123','16987654321','1985-06-23'),
+	 ('Carlos Pereira','carlos.pereira@example.com','senha123','16123987456','1992-11-30'),
+	 ('Ana Souza','ana.souza@example.com','senha123','16456123789','1987-04-18'),
+	 ('Pedro Costa','pedro.costa@example.com','senha123','16789123456','1995-08-22'),
+	 ('Laura Lima','laura.lima@example.com','senha123','16321654987','1998-09-09'),
+	 ('Lucas Alves','lucas.alves@example.com','senha123','16654321987','1993-12-01'),
+	 ('Fernanda Rocha','fernanda.rocha@example.com','senha123','16741852963','1991-07-07'),
+	 ('Rafael Martins','rafael.martins@example.com','senha123','16369258147','1994-03-27'),
+	 ('Juliana Nunes','juliana.nunes@example.com','senha123','16258147369','1986-05-15'),
+	 ('Paulo Araujo','paulo.araujo@example.com','senha123','16159753486','1997-10-12'),
+	 ('Beatriz Melo','beatriz.melo@example.com','senha123','16486159753','1990-02-28'),
+	 ('Renato Dias','renato.dias@example.com','senha123','16753486159','1996-11-11'),
+	 ('Camila Ribeiro','camila.ribeiro@example.com','senha123','16963852741','1989-08-03'),
+	 ('Thiago Teixeira','thiago.teixeira@example.com','senha123','16852741963','1992-12-24'),
+	 ('Patrícia Fernandes','patricia.fernandes@example.com','senha123','16741963852','1991-01-10'),
+	 ('Rodrigo Gomes','rodrigo.gomes@example.com','senha123','16963741852','1987-06-30'),
+	 ('Mariana Batista','mariana.batista@example.com','senha123','16147258369','1998-09-22'),
+	 ('Fábio Freitas','fabio.freitas@example.com','senha123','16369147258','1994-04-16'),
+	 ('Isabela Cardoso','isabela.cardoso@example.com','senha123','16258369147','1985-11-08');
+
+	insert into organizador (nome_organizador, email_organizador, senha_organizador, telefone_organizador) values
+	 ('Organização ABC','contato@abc.com','senha123','11111222333'),
+	 ('Eventos XYZ','info@xyz.com','senha123','11222333444'),
+	 ('Festivais BR','contato@festbr.com','senha123','11333444555'),
+	 ('Eventos GL','support@gl.com','senha123','11444555666'),
+	 ('Eventos JQ','contact@jq.com','senha123','11555666777');
+
+	insert into eventos (nome_evento, data_hora_evento, local_evento, descricao_evento, fkid_organizador) values
+	 ('Festival de Verão','2024-12-15 18:00:00','Praia Central','Evento de música na Praia', 1),
+	 ('Congresso de Tecnologia','2024-11-20 09:00:00','Centro de Convenções','Discussões sobre tecnologia e Inovação', 2),
+	 ('Show Internacional','2024-10-30 20:00:00','Arena Principal','Show com Bandas Internacionais', 3);
+	
+	insert into ingressos (tipo_ingresso, preco_ingresso, fkid_evento) values
+	 ('VIP', 500, 1),
+	 ('Pista', 150, 1),
+	 ('Pista', 200, 2),
+	 ('VIP', 600, 3),
+	 ('Pista', 250, 3);
+
+
+
+	alter table usuario
+	 add unique (email);
+
+	alter table organizador
+	 add unique (email);
+
+	alter table usuario
+	 modify nome varchar(255) not null;
+
+	alter table usuario
+	 add column data_nascimento date not null;
+
+
+
+	update ingressos
+	 set preco_ingresso = preco_ingresso * 1.10
+	 where fkid_evento = 3;
+
+        delete from ingressos
+        where fkid_evento = 2;
+
+      select nome, data_nascimento
+      from usuario
+      where data_nascimento between "1990-01-01" and "1995-12-31"
+      order by data_nascimento;
+
+    update organizador
+    set telefone_organizador = "11000111222"
+    where email_organizador like "%xyz.com";
+
+  select nome_evento, data_hora_evento
+    from eventos
+   where fkid_organizador = 3;
+
+
+insert into compra(data_compra, fkid_usuario)
+   values ("2024-10-01 14:30:00", 1),
+   ("2024-10-02 11:15:00", 2),
+   ("2024-10-03 09:00:00", 3),
+   ("2024-10-24 16:45:00", 4),
+   ("2024-10-05 12:20:00", 5);
+
+insert into ingresso_compra(fkid_ingresso,
+  fkid_compra, quantidade) values
+  (1, 1, 10),
+  (2, 2, 2),
+  (4, 3, 15),
+  (5, 4, 5);
+
+insert into presenca(fkid_compra, fkid_evento, data_hora_checkin) values
+  (1, 1, "2024-10-01 18:10:00"),
+  (2, 2, "2024-10-02 18:10:00"),
+  (3, 3, "2024-10-03 18:20:00");
+
+select nome, data_nascimento, timestampdiff
+     (year, data_nascimento, curdate()) as idade_atual 
+    from usuario;
