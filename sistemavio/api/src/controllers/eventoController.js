@@ -60,13 +60,36 @@ module.exports = class eventoController {
           return res.status(500).json({ error: "Erro ao criar evento!" });
         }
         if(results.affectedRows === 0){
-          return res.status(404).json({message: "Usuário não encontrado"});
+          return res.status(404).json({message: "Evento não encontrado"});
         }
         return res.status(201).json({ message: "Evento atualizado com sucesso: "});
       });
     } catch (error) {
       console.log("Erro ao executar consulta: ", error);
-      return res.status(500).json({ error: "Erro interno do servido" });
+      return res.status(500).json({ error: "Erro interno do servidor" });
     }
   } // fim do 'updateEvento'
+
+  static async deleteEvento(req, res) {
+    const eventoId = req.params.id_evento;
+    const query = `DELETE FROM evento WHERE id_evento = ?`;
+    const values = [eventoId];
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Evento não Encontrado" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Evento Excluido com Sucesso" });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    } 
+  }
 };
