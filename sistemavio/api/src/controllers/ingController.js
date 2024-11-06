@@ -15,6 +15,10 @@ module.exports = class ingController {
       return res.status(400).json({
         error: "ID inválido. Deve conter dígitos numéricos",
       });
+    }  else if (tipo.toLowerCase() != "vip" && tipo.toLowerCase() != "pista") {
+      return res.status(400).json({
+        error: "Tipo inválido. Deve ser 'VIP' ou 'Pista'",
+      });
     }
     const query = ` INSERT INTO ingresso (preco,tipo,fk_id_evento) VALUES (?,?,?)`;
     const values = [preco, tipo, fk_id_evento];
