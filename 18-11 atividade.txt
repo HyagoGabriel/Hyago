@@ -1,0 +1,35 @@
+select 
+    e.nome as evento,
+    coalesce(sum(ic.quantidade), 0) as quantidade_ingressos_vendidos
+from evento e
+right join ingresso i on e.id_evento = i.fk_id_evento
+right join ingresso_compra ic on i.id_ingresso = ic.fk_id_ingresso
+group by e.nome;
+
+
+======
+
+
+select 
+    coalesce(u.name, 'nenhum usuário') as usuario,
+    coalesce(e.nome, 'nenhum evento') as evento,
+    coalesce(sum(ic.quantidade), 0) as quantidade_ingressos
+from usuario u
+left join compra c on u.id_usuario = c.fk_id_usuario
+left join ingresso_compra ic on c.id_compra = ic.fk_id_compra
+left join ingresso i on ic.fk_id_ingresso = i.id_ingresso
+left join evento e on i.fk_id_evento = e.id_evento
+group by u.name, e.nome
+
+union
+
+select 
+    coalesce(u.name, 'nenhum usuário') as usuario,
+    coalesce(e.nome, 'nenhum evento') as evento,
+    coalesce(sum(ic.quantidade), 0) as quantidade_ingressos
+from evento e
+left join ingresso i on e.id_evento = i.fk_id_evento
+left join ingresso_compra ic on i.id_ingresso = ic.fk_id_ingresso
+left join compra c on ic.fk_id_compra = c.id_compra
+left join usuario u on c.fk_id_usuario = u.id_usuario
+group by u.name, e.nome;
