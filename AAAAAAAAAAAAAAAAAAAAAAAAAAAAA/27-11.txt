@@ -1,0 +1,97 @@
+
+
+
+Cadastro:
+http://localhost:5000/projeto_de_reserva/cadastro
+
+curl --location 'http://localhost:5000/projeto_de_reserva/cadastro' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"nome": "tina",
+"email": "tina@123",
+"cpf": "12345678901",
+"senha": "1234"
+}
+
+
+
+LOGIN:
+
+http://localhost:5000/projeto_de_reserva/login
+
+curl --location 'http://localhost:5000/projeto_de_reserva/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"email": "tina@123",
+"senha": "1234"
+}'
+
+==========================================================================
+atualizaçao:
+
+curl --location --request PUT 'http://10.89.240.78:5000/projeto_de_reserva/cadastro' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"nome": "tina",
+"email": "tina@1234",
+"cpf": "12345678901",
+"senha": "12344"
+}'
+
+==========================================================================
+
+curl --location 'http://localhost:5000/projeto_de_reserva/reservas' \
+--header 'Content-Type: application/json' \
+--data ''
+
+==========================================================================
+
+delete:
+
+curl --location --request DELETE 'http://10.89.240.78:5000/projeto_de_reserva/cadastro/12345678901' \
+--header 'Content-Type: application/json' \
+--data ''
+
+==========================================================================
+
+post
+Reserva:
+
+curl --location 'http://localhost:5000/projeto_de_reserva/reserva' \
+--header 'Content-Type: application/json' \
+--data '{
+    "fk_id_usuario":"1",
+    "fk_id_sala":"1", 
+    "datahora_inicio":"2024-01-01 00:00:00", 
+    "datahora_fim":"2024-01-01 01:00:00"
+}'
+
+==========================================================================
+
+atualizaçao
+
+curl --location --request PUT 'http://localhost:5000/projeto_de_reserva/reserva/1' \
+--header 'Content-Type: application/json' \
+--data ' {
+    "datahora_inicio":"2024-01-01 01:00:00", 
+    "datahora_fim":"2024-01-01 02:00:00"
+}'
+
+==========================================================================
+
+delete:
+
+curl --location --request PUT 'http://localhost:5000/projeto_de_reserva/reserva/1' \
+--header 'Content-Type: application/json' \
+--data ''
+
+
+
+
+
+
+
+
+	
+
+

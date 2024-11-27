@@ -158,9 +158,9 @@ module.exports = class controllerCadastro {
   }
 
   static async deleteUser(req, res) {
-    const id_usuario = req.params.id;
-    const query = `DELETE FROM usuario WHERE id_usuario = ?`;
-    const values = [id_usuario];
+    const cpf = req.params.id;
+    const query = `DELETE FROM usuario WHERE cpf = ?`;
+    const values = [cpf];
 
     try {
       connect.query(query, values, function (err, results) {
