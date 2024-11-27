@@ -23,7 +23,7 @@ module.exports = class AgendamentoController {
     const queryHorario = `SELECT datahora_inicio, datahora_fim FROM reserva WHERE fk_id_sala = ? AND (
         (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
         (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
-        (datahora_inicio >= ? AND datahora_inicio < ?) OR  -- Novo horário começa dentro de um horário já reservado
+        (datahora_inicio >= ? AND datahora_inicio < ?) OR  -- Novo horá rio começa dentro de um horário já reservado
         (datahora_fim > ? AND datahora_fim <= ?) -- Novo horário termina dentro de um horário já reservado
       )`;
 
@@ -40,14 +40,11 @@ module.exports = class AgendamentoController {
     ];
 
     connect.query(queryHorario, valuesHorario, (err, resultadosH) => {
-      console.log(err);
       if (err) {
         return res.status(500).json({ error: "Erro ao verificar horário" });
       }
 
       connect.query(queryUsuario, valuesUsuario, (err, resultadosU) => {
-        
-
         if (err) {
           return res.status(500).json({ error: "Erro ao buscar usuário" });
         }
